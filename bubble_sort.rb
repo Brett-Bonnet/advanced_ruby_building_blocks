@@ -8,7 +8,7 @@ def bubble_sort(array)
       end
     end
   end
-  puts array
+ array
 end 
   
 

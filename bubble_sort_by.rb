@@ -8,7 +8,7 @@ def bubble_sort_by(array)
         end
       end
     end
-    puts array
+     array
   end 
 
  sorted_by = bubble_sort_by(["hi","hello","hey"]) do |left,right|
@@ -18,4 +18,3 @@ def bubble_sort_by(array)
 
   puts sorted_by
 
-  
