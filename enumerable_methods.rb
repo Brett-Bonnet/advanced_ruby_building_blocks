@@ -52,8 +52,24 @@ module Enumerable
   end
   
   def my_all?
-  
-  end
+    type = self.class
+    if type == Array
+      for i in 0..self.length-1
+        if !(yield(self[i]))
+          return false
+        else
+          return true
+        end
+      end
+    elsif type == Hash
+      for key, value in self
+        if !(yield(key, value))
+          return false
+        else
+          return true
+        end
+      end
+    end
   
   def my_any?
   
