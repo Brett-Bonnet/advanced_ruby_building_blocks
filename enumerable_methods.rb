@@ -50,29 +50,26 @@ module Enumerable
     end
 
   end
-  
+
   def my_all?
-    type = self.class
-    if type == Array
-      for i in 0..self.length-1
-        if !(yield(self[i]))
-          return false
-        else
-          return true
-        end
-      end
-    elsif type == Hash
-      for key, value in self
-        if !(yield(key, value))
-          return false
-        else
-          return true
-        end
+    for i in 0..self.length-1
+      if !yield(self[i])
+        return false
+      else
+        return true
       end
     end
+  end
   
   def my_any?
-  
+    any = false
+    for i in 0..self.length-1
+      if yield(self[i])
+        any = true
+      else
+      end
+    end
+    any
   end
   
   def my_none?
@@ -93,12 +90,12 @@ module Enumerable
 
 end
 
-
-array_test = [1, 2, 3, 4, 5, 6, 7, 8, 9, 10]
+array_test = [2, 1, 0, 3]
 hash_test = {"a" => 1, "b" => 2, "c" => 3}
 
-array_test.my_select {|x| x%2 == 0}
-hash_test.my_select {|x,y| y > 1}
 
 
 
+test = array_test.my_any? {|x| x > 2}
+
+puts test
