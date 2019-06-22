@@ -91,22 +91,33 @@ module Enumerable
     count
   end
     
-  def my_map
-  
+  def my_map(proc=false)
+    new_array = []
+    for i in 0..self.length-1
+      if proc
+        new_array[i] = proc.call(self[i])
+      else
+        new_array[i] = yield(self[i])
+      end
+    end
+    new_array
   end
   
-  def my_inject
-  
-  end
+ def my_inject(sum)
+    @total = sum
+      for i in 0..self.length-1
+        @total = yield(@total, self[i])
+      end  
+     @total
+    end
+ end
 
+ def multiply_els(array)
+  total = array.my_inject(1) {|product, number| product * number}
 end
 
-array_test = [2, 0, 2, 4, 2, 3, 2]
-hash_test = {"a" => 1, "b" => 2, "c" => 3}
 
+puts multiply_els([2, 3, 6])
 
+my_proc = Proc.new { |num| num * 2 }
 
-
-test = array_test.my_count {|x| x > 2}
-
-puts test
