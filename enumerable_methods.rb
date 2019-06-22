@@ -66,18 +66,29 @@ module Enumerable
     for i in 0..self.length-1
       if yield(self[i])
         any = true
-      else
       end
     end
     any
   end
   
   def my_none?
-  
+      none = true
+      for i in 0..self.length-1
+        if yield(self[i])
+          none = false
+        end
+      end
+      none
   end
   
   def my_count
-  
+    count = 0
+    for i in 0..self.length-1
+      if yield(self[i])
+        count += 1
+      end
+    end
+    count
   end
     
   def my_map
@@ -90,12 +101,12 @@ module Enumerable
 
 end
 
-array_test = [2, 1, 0, 3]
+array_test = [2, 0, 2, 4, 2, 3, 2]
 hash_test = {"a" => 1, "b" => 2, "c" => 3}
 
 
 
 
-test = array_test.my_any? {|x| x > 2}
+test = array_test.my_count {|x| x > 2}
 
 puts test
